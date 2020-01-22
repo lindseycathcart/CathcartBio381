@@ -27,7 +27,7 @@ Numbers:
 
 <i@typora.io>
 
-![flow](C:\Users\Lindsey Cathcart\Desktop\CathcartBio381\flow.jpg)
+![alt](https://lindseycathcart.github.io/CathcartBio381/flow.jpg)
 
 > This is a blockquote.
 

@@ -13,6 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Homework 1
-[Typora document](typora testing.pdf)
+[Typora document](typora testing.html)
 
 
