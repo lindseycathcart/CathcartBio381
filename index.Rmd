@@ -16,3 +16,6 @@ knitr::opts_chunk$set(echo = TRUE)
 [Typora document](typora testing.html)
 
 
+## Homework 3
+[Rmd document](homework-3.html)
+
