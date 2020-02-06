@@ -19,3 +19,5 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Homework 3
 [Rmd document](homework-3.html)
 
+## Homework 4
+[Rmd document](homework_04.html)
