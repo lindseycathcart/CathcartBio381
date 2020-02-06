@@ -1,0 +1,142 @@
+---
+title: "Homework 4"
+author: "Lindsey Cathcart"
+date: "2/5/2020"
+output: html_document
+---
+
+### Question 1
+
+``` {r}
+# assign variables
+x <- 1.1
+a <- 2.2
+b <- 3.3
+
+# print values
+print(x)
+print(a)
+print(b)
+```
+
+
+a. Solve expression: $x^{a^b}$
+
+```{r}
+# assign variable to expression
+z <- x^{a^b}
+
+print(z)
+```
+
+
+
+b. Solve expression: ${(x^a)}^b$
+```{r}
+# assign variable to expression
+z <- {x^a}^b
+print(z)
+
+```
+
+
+c. Solve expresion: $3x^3 + 2x^2 + 1$
+```{r}
+# assign variable to expression
+z <- 3*x^3 + 2*x^2 + 1
+print(z)
+```
+
+
+
+### Question 2
+
+a.
+```{r}
+# combine sequences from 1-8 and 7-1
+c(seq(1,8,1),seq(7,1,-1)) 
+```
+b.
+```{r}
+# replicate values from 1-5, 1-5 times each
+rep(1:5, 1:5)
+```
+c.
+```{r}
+# replicate values from 5-1, 1-5 times each
+rep(5:1, 1:5)
+
+```
+
+
+### Question 3
+
+```{r}
+# generate 2 random numbers
+xy<- runif(2)
+print(xy)
+# insert variables "xy[1]" and "xy[2]" into expression
+r <- sqrt(xy[1]^2 + xy[2]^2)
+print(r)
+# tangent function solve for theta
+theta <- atan((xy[2])/(xy[1]))
+print(theta)
+```
+
+
+### Question 4
+
+```{r}
+#initial queue given
+queue <- c("sheep", "fox", "owl", "ant")
+print(queue)
+```
+a.
+```{r}
+queue <- c("sheep", "fox", "owl", "ant", "serpent")
+print(queue)
+
+```
+b.
+```{r}
+queue <- c("fox", "owl", "ant", "serpent")
+print(queue)
+
+```
+c.
+```{r}
+queue <- c("donkey", "fox", "owl", "ant", "serpent")
+print(queue)
+
+```
+d. 
+```{r}
+queue <- c("donkey", "fox", "owl", "ant")
+print(queue)
+```
+e.
+```{r}
+queue <- c("donkey", "fox", "ant")
+print(queue)
+```
+
+f.
+```{r}
+queue <- c("donkey", "fox", "aphid", "ant")
+print(queue)
+```
+
+g.
+The aphid is 3rd in line.
+
+
+
+### Question 5
+create a vector of all integers 1-100 not divisible by 2, 3, or 7
+
+```{r}
+# create vector from 1-100
+# do not include values divisible by 2, 3, or 7 in vector
+v <- (1:100)
+v[!(!v%%2) + (!v%%3) + (!v%%7)]
+```
