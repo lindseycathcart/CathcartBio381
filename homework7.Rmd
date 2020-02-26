@@ -1,0 +1,212 @@
+---
+title: "Homework 7"
+author: "Lindsey Cathcart"
+date: "2/26/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Creating Fake Data Sets to Explore Hypotheses
+### Part 1
+
+##### Hypothesis: Decreased ground arthropod diversity is associated with invasive plant-herbivore pair.
+
+##### Treatment 1: No established invasives (Shannon's Diversity index)
+###### n = 25
+###### mean = 4
+###### variance = 0.22
+
+##### Generate random normal data, visualize in histogram
+```{r}
+library(ggplot2)
+T1Norm <- rnorm(n=25,mean=4,sd=0.22)
+qplot(T1Norm, color=I("black"),fill=I("cornflowerblue"))
+print(T1Norm)
+
+```
+
+##### Treatment 2: Established plant-herbivore pair (Shannon's Diversity index)
+###### n = 25
+###### mean = 1.7
+###### variance = 0.35
+
+##### Generate random normal data, visualize in histogram
+```{r}
+T2Norm <- rnorm(n=25,mean=1.7,sd=0.35)
+qplot(T2Norm, color=I("black"),fill=I("maroon"))
+
+```
+##### Organize data into dataframe
+
+```{r}
+diversity_data <- data.frame(T1Norm,T2Norm)
+print(diversity_data)
+
+##### use tidyr gather() to make wide data long
+library(tidyr)
+long_diversity_df <- gather(diversity_data, Treatment, Diversity, T1Norm:T2Norm)
+print(long_diversity_df)
+```
+
+##### Run ANOVA test on long_diversity_df
+```{r}
+anova_diversity <- aov(Diversity~Treatment, data=long_diversity_df)
+
+
+summary(anova_diversity)
+```
+
+
+##### Generate a boxplot to visualize differences in diversity across treatment groups
+
+```{r}
+str(long_diversity_df)
+
+Diversity <-long_diversity_df$Diversity
+Treatment <- long_diversity_df$Treatment
+diversity_boxplot <- boxplot(Diversity~Treatment,data=long_diversity_df,
+                             xlab="Treatment",
+                             ylab="Shannon's Diversity Index",
+                             col=c("cornflowerblue","maroon"),
+                             border="black")
+
+
+```
+
+### Part 2 
+##### Adjust means to see how big the differences between groups can be to detect significance.
+###### T1 mean decrease from 4 to 2.9
+###### T2 mean increase from 1.7 to 2.6
+
+##### Generate random normal data, visualize in histogram
+```{r}
+T1Norm <- rnorm(n=25,mean=2.9,sd=0.22)
+qplot(T1Norm, color=I("black"),fill=I("cornflowerblue"))
+print(T1Norm)
+
+```
+
+##### Treatment 2: Established plant-herbivore pair (Shannon's Diversity index)
+###### n = 200
+###### mean = 1.7
+###### variance = 0.35
+
+##### Generate random normal data, visualize in histogram
+```{r}
+T2Norm <- rnorm(n=25,mean=2.6,sd=0.35)
+qplot(T2Norm, color=I("black"),fill=I("maroon"))
+
+```
+
+##### Organize data into dataframe
+```{r}
+diversity_data <- data.frame(T1Norm,T2Norm)
+print(diversity_data)
+
+##### use tidyr gather() to make wide data long
+long_diversity_df <- gather(diversity_data, Treatment, Diversity, T1Norm:T2Norm)
+print(long_diversity_df)
+```
+
+##### Run ANOVA test on long_diversity_df
+```{r}
+anova_diversity <- aov(Diversity~Treatment, data=long_diversity_df)
+
+
+summary(anova_diversity)
+```
+
+##### Generate a boxplot to visualize differences in diversity across treatment groups
+
+```{r}
+str(long_diversity_df)
+
+Diversity <-long_diversity_df$Diversity
+Treatment <- long_diversity_df$Treatment
+diversity_boxplot <- boxplot(Diversity~Treatment,data=long_diversity_df,
+                             xlab="Treatment",
+                             ylab="Shannon's Diversity Index",
+                             col=c("cornflowerblue","maroon"),
+                             border="black")
+
+```
+
+#### Part 2 result - without changing variance or sample size, means 2.6 & 2.9 are significantly different (effect size = 0.3)
+
+
+
+
+### Part 3 
+##### Determine the minimum sample size under which original effect size is significant.
+
+##### Generate random normal data, visualize in histogram
+```{r}
+library(ggplot2)
+T1Norm <- rnorm(n=2,mean=4,sd=0.22)
+qplot(T1Norm, color=I("black"),fill=I("cornflowerblue"))
+print(T1Norm)
+
+
+T2Norm <- rnorm(n=2,mean=1.7,sd=0.35)
+qplot(T2Norm, color=I("black"),fill=I("maroon"))
+
+```
+
+##### Organize data into dataframe
+
+```{r}
+diversity_data <- data.frame(T1Norm,T2Norm)
+print(diversity_data)
+
+##### use tidyr gather() to make wide data long
+library(tidyr)
+long_diversity_df <- gather(diversity_data, Treatment, Diversity, T1Norm:T2Norm)
+print(long_diversity_df)
+```
+
+##### Run ANOVA test on long_diversity_df
+```{r}
+anova_diversity <- aov(Diversity~Treatment, data=long_diversity_df)
+
+
+summary(anova_diversity)
+```
+
+
+##### Generate a boxplot to visualize differences in diversity across treatment groups
+
+```{r}
+str(long_diversity_df)
+
+Diversity <-long_diversity_df$Diversity
+Treatment <- long_diversity_df$Treatment
+diversity_boxplot <- boxplot(Diversity~Treatment,data=long_diversity_df,
+                             xlab="Treatment",
+                             ylab="Shannon's Diversity Index",
+                             col=c("cornflowerblue","maroon"),
+                             border="black")
+
+
+```
+
+#### Minimum sample size for significance is n=2 because the difference in means is large and SD is small.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
