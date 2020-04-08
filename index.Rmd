@@ -24,7 +24,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Homework 5 in progress
 
-## Homework 6 in progress
+## Homework 6
+[Rmd document](homework6.html)
 
 ## Homework 7
 [Rmd document](homework7.html)
