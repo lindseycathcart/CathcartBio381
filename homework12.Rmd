@@ -1,0 +1,114 @@
+---
+title: "Homework12"
+author: "Lindsey Cathcart"
+date: "4/14/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# ggplot
+
+##### beaver1 & beaver 2
+
+
+```{r}
+library(ggplot2)
+library(patchwork)
+library(TeachingDemos)
+
+
+beaver1$activ <- as.factor(beaver1$activ)
+beaver2$activ <- as.factor(beaver2$activ)
+
+
+b1 <- ggplot(data=beaver1,
+             mapping=aes(x=time,y=temp))+
+  geom_point(size=3,
+             mapping=aes(color=activ)) + theme_bw() + geom_smooth()
+
+b2 <- ggplot(data=beaver2, mapping=aes(x=time,y=temp)) + geom_point(size=3,
+                                                                    mapping=aes(color=activ)) + theme_bw() + geom_smooth()
+
+
+b1 / b2 + plot_annotation(tag_levels = "A") + plot_annotation(caption="Internal temperatures of two adult beavers (A & B) fluctuate over time.")
+
+
+```
+
+##### Old faithful
+```{r}
+
+# faithful
+# eruptions: eruption time in minutes
+# waiting: waiting time to next eruption in minutes
+
+
+f1 <- ggplot(data=faithful,
+             mapping=aes(x=eruptions)) +
+  geom_histogram(color="black",fill="springgreen4") +
+  labs(x="Eruption time (min)",
+       y="Frequency")
+
+   
+f2 <- ggplot(data=faithful,
+             mapping=aes(x=waiting)) +
+  geom_histogram(color="black",fill="springgreen1") +
+  labs(x="Time between eruptions (min)",
+       y="Frequency")
+
+
+f3 <- ggplot(data=faithful,
+             mapping=aes(x=eruptions,
+                         y=waiting)) +
+  geom_point() +
+  geom_smooth(se=FALSE, method=lm, formula = y ~ x) + theme_classic() +
+  labs(x="Eruption time (min)",
+       y="Time between eruptions (min)") 
+
+
+                  
+
+(f1 + theme_classic() | f2 + theme_classic()) / f3
+
+```
+
+##### Chick weight
+
+```{r}
+
+# column names "weight" "Time" "Chick" "Diet"
+
+c1 <- ggplot(data=ChickWeight,
+             mapping=aes(x=Time,
+                         y=weight)) + 
+  geom_point() +
+  labs(x="Days since hatching",
+       y="Weight (g)") +
+  geom_smooth(method=lm) +
+  theme_bw()
+c1 + facet_grid(.~Diet) 
+
+
+c2 <- ggplot(data=ChickWeight,
+             mapping=aes(x=Time,
+                         y=weight)) + 
+    labs(x="Days since hatching",
+       y="Weight (g)") +
+  geom_smooth(method=lm, se=FALSE) +
+  theme_bw()
+c2 + facet_grid(.~Diet)
+
+c3 <- ggplot(data=ChickWeight,
+             mapping=aes(x=Diet,
+                         y=weight,
+                         fill=Diet)) +
+  geom_boxplot() + theme_bw() +
+  labs(x="Diet",
+       y="Weight (g)") +
+  theme(legend.position="none")
+c3
+
+(c2 | c3) / c1 + facet_grid(.~Diet)
+
+```
