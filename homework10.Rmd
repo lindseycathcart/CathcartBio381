@@ -81,7 +81,6 @@ DesignMatrix(r=2,
 ```
 
 
-##### 4. Use the code from the upcoming April 2nd lecture (Randomization Tests) to design and conduct a randomization test for some of your own data. You will need to modify the functions that read in the data, calculate the metric, and randomize the data. Once those are set up, the program should run correctly calling your new functions. Also, to make your analysis fully repeatable, make sure you set the random number seed at the beginning (use either set.seed() in base R, or char2seed in the TeachingDemos package
 
 
 

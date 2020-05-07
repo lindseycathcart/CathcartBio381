@@ -12,6 +12,10 @@ output: html_document
 ##### Simulate other data sets by following the methods in Homework 6 by selecting appropriate statistical distributions and estimating parameters for those from the real data.
 
 ```{r}
+library(tidyr)
+library(MASS)
+  
+  
 # clean up my dataset using gather()
 mydata <- read.table("LCmmp_csv.csv",header=TRUE,sep=",", stringsAsFactors=FALSE)
 
@@ -20,7 +24,12 @@ z <- z[z$Density>0,]
 
 
 str(z)
+z
+
 summary(z)
+
+expoPars <- fitdistr(z$Density,"exponential")
+rateML <- expoPars$estimate["rate"]
 
 # data set follows the exponential distribution
 # simulate new data
@@ -32,10 +41,7 @@ head(newdata)
 
 
 ```{r}
-mydata <- read.table("LCmmp_csv.csv",header=TRUE,sep=",", stringsAsFactors=FALSE)
 
-z <- gather(mydata, Year, Density, y1992:y2018)
-z <- z[z$Density>0,]
 #  -----------------------------------
 # FUNCTION file_builder 
 # description: creates a set of random files based off of my exponential distribution for regression  
@@ -54,8 +60,10 @@ for (i in seq_len(file_n)) {
   
   
   
-  var_x <- runif(file_length) # create random x 
+  var_x <- runif(file_length) # create random x ################## throw in exponential parameters
   var_y <- runif(file_length) # create random y
+  
+  
   df <- data.frame(var_x,var_y) # bind into a dataframe
   bad_vals <- rpois(n=1,lambda=file_NA) # determine NA number
   df[sample(nrow(df),size=bad_vals),1] <- NA
